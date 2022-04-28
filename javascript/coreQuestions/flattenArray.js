@@ -1,9 +1,5 @@
 // ref: https://bigfrontend.dev/problem/implement-Array-prototype.flat
 
-//There is already Array.prototype.flat() in JavaScript (ES2019), which reduces the nesting of Array.
-//
-// Could you manage to implement your own one?
-
 const flat = (arr, depth=1) => {
     if(depth <=0){
         return arr;

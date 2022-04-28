@@ -1,6 +1,5 @@
 // ref: https://bigfrontend.dev/problem/implement-debounce-with-leading-and-trailing-option
 
-
 let currentTime = 0
 
 const run = (input) => {

@@ -1,10 +1,4 @@
-//Currying is a useful technique used in JavaScript applications.
-//
-// Please implement a curry() function, which accepts a function and return a curried one.
-
-//more to read
-// https://javascript.info/currying-partials
-// https://lodash.com/docs/4.17.15#curry
+// ref: https://bigfrontend.dev/problem/implement-curry
 
 const join = (a, b, c) => {
     return `${a}_${b}_${c}`

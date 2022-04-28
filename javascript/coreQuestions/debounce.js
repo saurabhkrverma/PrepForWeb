@@ -1,12 +1,5 @@
 // ref: https://bigfrontend.dev/problem/implement-basic-debounce
 
-// Debounce is a common technique used in Web Application, in most cases using lodash solution would be a good choice.
-//
-// could you implement your own version of basic debounce()?
-//
-// In case you forgot, debounce(func, delay) will returned a debounced function, which delays the invoke.
-
-
 let currentTime = 0
 
 const run = (input) => {
