@@ -24,3 +24,5 @@ const woo = Singleton.getInstance();
 console.log(foo,woo,(foo===woo));
 
 
+
+
