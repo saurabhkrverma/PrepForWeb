@@ -8,7 +8,6 @@ let merge = function(intervals) {
     intervals.sort((interval1, interval2)=>{
         return (interval1[0]-interval2[0]);
     });
-    console.log(intervals);
     let lastRange = Math.max();
     for(let i=0; i<intervals.length;){
         const currInterval = intervals[i];
