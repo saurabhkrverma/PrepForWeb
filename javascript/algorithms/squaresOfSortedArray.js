@@ -93,7 +93,7 @@ const sortedSquares3 = (nums)=>{
     return result;
 }
 
-// const nums = [-4,-1,0,2,9];
+
 console.log(sortedSquares3([-4,-1,0,2,9]));
 console.log(sortedSquares3([-5,-1,-1,1,5]));
 
