@@ -17,7 +17,7 @@ let getString = (str) => {
 }
 
 /**
- * @param {string} s
+ * @param {string} str
  * @return {string}
  */
 let decodeString = function(str) {
@@ -31,7 +31,7 @@ let decodeString = function(str) {
         str =str.replace(simpleGroups[i],decodedGroup);
     }
     return decodeString(str);
-};
+}
 
 console.log(decodeString("3[a]"))
 console.log(decodeString("3[a]2[b]"))
