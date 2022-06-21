@@ -48,9 +48,33 @@ let getUniqueClassName = (()=>{
     return foo;
 })();
 
-let i=0
-while(i<3000){
-    console.log(getUniqueClassName());
+// let i=0
+// while(i<3000){
+//     console.log(getUniqueClassName());
+//     i++;
+// }
+
+let woo = (function(){
+    let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let index = 0;
+    let foo = function(){
+        let currentIndex = (index%52);
+        let j = index;
+        let classname = '';
+        while(j>=0){
+            classname =  str[currentIndex%52] + classname;
+            // still not sure why the - 1
+            j = Math.floor(j / 52) - 1;
+        }
+        index++;
+        return classname;
+    }
+    return foo;
+})();
+
+let i=0;
+while(i<53){
+    console.log(woo());
     i++;
 }
 
