@@ -7,10 +7,6 @@ html.innerHTML = `<h1> this is </h1><p class="paragraph"> a <button> button </bu
  * @param {HTMLElement}
  * @return {object} object literal presentation
  */
-/**
- * @param {HTMLElement}
- * @return {object} object literal presentation
- */
 function virtualize(element) {
     if(element === null || element === undefined){
         return;
