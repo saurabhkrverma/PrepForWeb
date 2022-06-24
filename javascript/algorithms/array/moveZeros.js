@@ -33,5 +33,24 @@ let moveZeroesEfficiently = (nums)=>{
     return nums
 }
 
-// console.log(moveZeroes([1,0,3,0,0,5,0]));
-console.log(moveZeroes1([1,0,3,0,0,5,0]))
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ * */
+
+let moveZerosAlt = (nums)=>{
+    let lastNonZeroIndex = -1;
+    for(let i=0; i<nums.length; i++){
+        // check if its a non zero digit
+        if(nums[i] !== 0){
+            // swap it with last non zero index +1
+            let temp = nums[++lastNonZeroIndex]
+            nums[lastNonZeroIndex] = nums[i];
+            nums[i] = temp;
+        }
+    }
+    return nums
+}
+
+console.log(moveZerosAlt([1,0,3,0,0,5,0]));
+
