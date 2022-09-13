@@ -4,15 +4,17 @@ const join = (a, b, c) => {
     return `${a}_${b}_${c}`
 }
 
-const curried = (...args)=> {
-    if (args.length >= join.length) {
-        return join.apply(this, args)
-    } else {
-        return curried.bind(this, ...args);
+let curry = (fn) => {
+    let curried = (...args) => {
+        if(args.length >= fn.length){
+            return fn(...args)
+        } else {
+            return (...next)=>{
+                return curried(...args,...next)
+            }
+        }
     }
-}
 
-const curry = (join) => {
     return curried;
 }
 
