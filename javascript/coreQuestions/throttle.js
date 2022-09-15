@@ -24,7 +24,7 @@ const run = (input) => {
  * @param {number} wait
  * @returns {(...args:any[]) => any}
  */
-function throttle(func, wait) {
+function throttle(func, wait, option = {leading: true, trailing: true}) {
     let invoked = false;
     let lastArgs;
     return function throttled(...args){
