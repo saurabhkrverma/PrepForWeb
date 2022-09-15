@@ -26,21 +26,22 @@ const run = (input) => {
  */
 function throttle(func, wait) {
     let invoked = false;
-    let lastArgs = null;
-    return function throttled(...args) {
-        lastArgs = args;
-        if(!invoked) {
+    let lastArgs;
+    return function throttled(...args){
+        if(!invoked){
             func.apply(this,args);
             invoked = true;
-            lastArgs = null;
+            lastArgs = false;
+        } else {
+            lastArgs = args;
             return;
         }
-        let timeoutId = setTimeout(()=>{
+        setTimeout(()=>{
             invoked = false;
-            if(lastArgs) {
-                throttled.apply(this,lastArgs);
+            if(lastArgs){
+                throttled(lastArgs);
             }
-        },wait-1)
+        }, wait)
     }
 }
 
