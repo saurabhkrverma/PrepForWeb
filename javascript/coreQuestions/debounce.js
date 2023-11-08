@@ -1,6 +1,6 @@
 // ref: https://bigfrontend.dev/problem/implement-basic-debounce
 
-let currentTime = 0
+let currentTime = 0;
 
 const run = (input) => {
     currentTime = 0

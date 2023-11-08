@@ -78,8 +78,8 @@ root.right = new Node(3);
 root.left.left = new Node(4);
 root.right.right = new Node(7);
 
-const btString = serialize(root)
-console.log(btString);
-console.log(deserialize(btString));
+// const btString = serialize(root)
+// console.log(btString);
+console.log(JSON.stringify(deserialize('1,2,3,4,null,null,5,6,7,8,null,null,null,null,9,10')));
 
 

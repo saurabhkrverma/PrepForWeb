@@ -116,17 +116,61 @@ class BetterChannel {
 }
 //
 const { port1, port2 } = new BetterChannel()
+console.log(port1, port2 );
+// port2.onmessage = (message, reply) => {
+//     if (message === 'ping?') {
+//         reply('pong!')
+//         reply('pong!')
+//     }
+//     if (message === 'pong?') {
+//         reply('ping!')
+//     }
+// }
+//
+// port1.postMessage('ping?', (data) => {
+//     console.log(data) // 'pong!'
+// })
 
-port2.onmessage = (message, reply) => {
-    if (message === 'ping?') {
-        reply('pong!')
-        reply('pong!')
+
+class MyPort {
+    #callback;
+    constructor(name) {
+        this.name = name;
+        this.#callback;
     }
-    if (message === 'pong?') {
-        reply('ping!')
+
+    onMessage = (message)=>{
+        console.log(`this is ${this.name}`, message)
+        if (message === 'ping?') {
+            this.postMessage('pong!')
+        }
+        if (message === 'pong?') {
+            this.postMessage('ping!')
+        }
+    }
+
+    postMessage = (message) => {
+        this.#callback(message);
+    }
+
+    postMessageRegister = (callback) => {
+        this.#callback = callback;
     }
 }
 
-port1.postMessage('ping?', (data) => {
-    console.log(data) // 'pong!'
-})
+
+class MyChannel {
+    constructor() {
+        this.port1 = new MyPort('port1');
+        this.port2 = new MyPort('port2');
+
+        this.port1.postMessageRegister(this.port2.onMessage)
+        this.port2.postMessageRegister(this.port1.onMessage)
+    }
+}
+
+// const {port1, port2} = new MyChannel();
+//
+// port1.postMessage('ping?');
+
+

@@ -1,24 +1,5 @@
 // ref: https://bigfrontend.dev/problem/create-lazyman
 
-const createLaziness = (logFunc) => {
-    return {
-        eat: eatFunc.bind(this,logFunc),
-        sleep: sleepFunc.bind(this, logFunc)
-    }
-}
-
-const eatFunc = (logFunc,food) => {
-    logFunc(`Eat ${food}`);
-    return createLaziness(logFunc);
-}
-
-const sleepFunc = (logFunc,sleepTime) => {
-    const timeoutId = setTimeout(()=>{
-        logFunc(`Wake up after ${sleepTime} seconds`);
-    },sleepTime*1000);
-    return createLaziness(logFunc);
-}
-
 /**
  * @param {string} name
  * @param {(log: string)=>void} logFunc
@@ -42,6 +23,7 @@ const lazyMan = (name, logFunc) =>{
     }
     lazyMan.eat = (food)=>{
         tasks.push(()=>{
+            console.log('who called this');
             logFunc(`Eat ${food}`);
             executeTask();
         });
@@ -79,4 +61,5 @@ const lazyMan = (name, logFunc) =>{
 }
 
 
-lazyMan('sanju',console.log).eat('pizza').eat("biryani").sleep(5).eat("icecream").sleepFirst(2);
+// lazyMan('sanju',console.log).eat('pizza').eat("biryani").sleep(5).eat("icecream").sleepFirst(2);
+lazyMan('sanju',console.log).eat('pizza')

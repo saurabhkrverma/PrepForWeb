@@ -44,3 +44,4 @@ newFunc(1,2,callback)
     }).catch((error)=>{
         console.log("error-p", error)
     })
+

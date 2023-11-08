@@ -72,15 +72,15 @@ let woo = (function(){
     return foo;
 })();
 
-let i=0;
-while(i<53){
-    console.log(woo());
-    i++;
-}
+// let i=0;
+// while(i<53){
+//     console.log(woo());
+//     i++;
+// }
 
 
-// console.log(getUniqueClassName())
-// console.log(getUniqueClassName())
-// getUniqueClassName.reset();
-// console.log(getUniqueClassName())
-// console.log(getUniqueClassName())
+console.log(getUniqueClassName())
+console.log(getUniqueClassName())
+getUniqueClassName.reset();
+console.log(getUniqueClassName())
+console.log(getUniqueClassName())
