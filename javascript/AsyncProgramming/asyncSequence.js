@@ -12,10 +12,6 @@ type AsyncFunc = (
 
 */
 
-const asyncTimes2 = (callback, num) => {
-    setTimeout(() => callback(null, num * 2), 100)
-}
-
 /**
  * @param {AsyncFunc[]} funcs
  * @return {(callback: Callback) => void}
@@ -44,6 +40,59 @@ function sequence(funcs){
 
     return executor;
 }
+
+// playing with promises
+
+const myCallback = (err, data) => {
+    if(err){
+        console.log('callback-error', err)
+    } else {
+        console.log('callback-success',data)
+    }
+}
+
+const asyncTimes2 = (callback, num) => {
+    setTimeout(() => callback(null, num * 2), 100)
+}
+
+// asyncTimes2(myCallback,2);
+
+
+const executor = (callback, num, func) => {
+    func(callback, num);
+}
+const sequence2 = (asyncFuncs = [])=>{
+    let originalCallback;
+    const internalCallback = (err, data) => {
+        if(err) {
+            originalCallback(err);
+        } else {
+            const asyncFunc = asyncFuncs.shift();
+            if(asyncFunc){
+                executor(internalCallback, data, asyncFunc);
+            } else originalCallback(err,data);
+        }
+
+    }
+    return (callback, num) => {
+        originalCallback = callback;
+        const asyncFunc = asyncFuncs.shift();
+        if(asyncFunc){
+            executor(internalCallback, num, asyncFunc);
+        } else callback(err, num);
+    }
+}
+
+const asyncTimes4 = sequence(
+    [
+        asyncTimes2,
+        asyncTimes2
+    ]
+)
+
+// asyncTimes4((error, data) => {
+//     console.log(data) // 4
+// }, 2)
 
 // asyncTimes2((err,data)=>{console.log(err,data)}, 5);
 
