@@ -15,7 +15,7 @@ function findDuplicateTransactions (transactions =[]){
     }
     // sort the list based on the time
     transactions.sort((transactionA, transactionB)=> {
-        return transactionA.time - transactionB
+        return transactionA.time - transactionB.time
     });
 
     // create a map tp keep track to duplicates
