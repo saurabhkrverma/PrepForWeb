@@ -1,29 +1,23 @@
+// chain promises
 
-/**
- * @param {number[][]} intervals
- * @return {number[][]}
- */
-let merge = function(intervals) {
+const async2= (num) => {
+    return Promise.resolve(num*2);
+}
 
-    intervals.sort((interval1, interval2)=>{
-        return interval1[0]-interval2[0];
-    });
+// async2(2).then(async2).then(console.log);
 
-    for(let i =0; i<intervals.length-1;){
-        const currInterval = intervals[i];
-        const nextInterval = intervals[i+1];
-        if(currInterval[1]>=nextInterval[0]){
-            currInterval[1] = Math.max(currInterval[1],nextInterval[1]);
-            intervals.splice(i+1,1);
-        } else {
-            i++;
-        }
+const createPipe = (funcs)=>{
+    return (num)=>{
+        return new Promise((resolve, reject)=>{
+            const chain = funcs.reduce((acc, func)=>{
+                return acc.then(func)
+            }, Promise.resolve(num))
+            resolve(chain);
+        })
     }
-
-    return intervals;
-
-};
+}
 
 
-const sampleIntervals = [[1,4],[0,2],[3,5]];
-console.log(merge(sampleIntervals));
+
+const test = createPipe([async2, async2])
+test(2).then(console.log);
