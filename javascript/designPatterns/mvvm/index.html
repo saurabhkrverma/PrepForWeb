@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>ToDo - MVVM</title>
+        <link rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+    <div id="app">
+        <input type="text" id="todoInput" placeholder="Enter the task"  data-bind="value: todoInputValue"/>
+        <button id="todoSubmit" data-bind="click: addTodo">submit</button>
+        <ul id="todoList" data-bind="forEach: todos"></ul>
+    </div>
+    <script src="mvvm.js"></script>
+    </body>
+</html>
