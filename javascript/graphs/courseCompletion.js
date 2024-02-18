@@ -1,55 +1,94 @@
-// https://leetcode.com/problems/course-schedule/description/
-
-let canFinish = function(numCourses, prerequisites) {
-
-    let preMap = {};
-    let visited = {};
-
-    for(let i=0; i<numCourses; i++) {
-        preMap[i] = [];
+class Graph {
+    constructor(vertices = []) {
+        this.vertices = vertices;
+        this.adjList = {}
+        this.vertices.forEach((vertex)=>{
+            this.adjList[vertex] = [];
+        })
     }
 
-    // build the adacency list
-    for(let i = 0; i< prerequisites.length; i++){
-        if(preMap[prerequisites[i][0]] === undefined){
-            preMap[prerequisites[i][0]] = [prerequisites[i][1]]
-        } else {
-            preMap[prerequisites[i][0]].push(prerequisites[i][1])
+    addEdge (source, destination) {
+        this.adjList[source].push(destination);
+    }
+
+}
+
+class DFS extends Graph {
+
+    constructor(vertices=[]) {
+        super(vertices);
+    }
+
+    dfs(startVertex, traversal=[], visited={}) {
+        visited[startVertex] = true;
+        traversal.push(startVertex);
+        const neighbours = this.adjList[startVertex]
+        for(let i=0; i<neighbours.length; i++){
+            const neighbour = neighbours[i];
+            if(!visited[neighbour]) {
+                this.dfs(neighbour,traversal,visited)
+            }
         }
+        return traversal;
     }
-    console.log(preMap)
-    const dfs = (node) => {
-        if(visited[node]){
+
+    dfsForCycle(startVertex, visited) {
+        if(visited[startVertex]) {
             return false;
         }
-        if(preMap[node] !==undefined){
-            if (preMap[node].length === 0){
-                return true;
+        visited[startVertex] = true;
+        const neighbours = this.adjList[startVertex];
+        for(let i=0; i<neighbours.length; i++){
+            const neighbour = neighbours[i];
+            const result = this.dfsForCycle(neighbour,visited);
+            if(result === false){
+                return false;
             }
+        }
+        visited[startVertex] = false;
+        return true
+    }
 
-            visited[node] = true;
-            for(let val of preMap[node]){
-                if(!dfs(val)){
-                    return false
+    detectCycle() {
+        let visited = {};
+        let result = true;
+        for(let i=0; i< this.vertices.length; i++){
+            const vertex = this.vertices[i];
+            if(!visited[vertex]) {
+                const noCyclePresent = this.dfsForCycle(vertex,visited);
+                if(!noCyclePresent) {
+                    result = false;
+                    break;
                 }
             }
-            visited[node] = false;
-
-            preMap[node] = [];
         }
-        return true;
-
+        return result;
     }
 
-    for(let key in preMap){
-        if(!dfs(key)){
-            return false
-        }
-    }
-    return true
+}
 
-};
+// const vertices = ['A', 'B', 'C', 'D', 'E', 'F'];
+// const graph = new DFS(vertices);
+//
+// graph.addEdge('A', 'B');
+// graph.addEdge('A', 'C');
+// graph.addEdge('B', 'D');
+// graph.addEdge('B', 'E');
+// graph.addEdge('C', 'F');
+// graph.addEdge('E', 'F');
 
-const numCourses = 5;
-const prerequisites = [[0,1],[0,2],[1,3],[1,4],[3,4]]
-console.log(canFinish(numCourses, prerequisites));
+
+const vertices = ['A', 'B', 'C', 'D'];
+const graph = new DFS(vertices);
+
+graph.addEdge('A', 'B');
+graph.addEdge('C', 'D');
+// graph.addEdge('D', 'C');
+
+console.log(graph.detectCycle());
+// console.log(graph.dfs("A"));
+
+
+
+
+

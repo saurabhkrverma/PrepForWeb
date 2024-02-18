@@ -67,19 +67,30 @@ const func = (resolve, reject)=> {
     }, 0)
 }
 
-const counter = (num)=>num+1;
-
-const counterWithPromise = (num)=>{
-    return new MyPromise((resolve,reject)=>resolve(num+1));
+const asyncAdd = (a,b)=>{
+    return new MyPromise((res,rej)=>{
+        res(a+b);
+    })
 }
 
-const counterNew = (num)=>{
-    return new Promise((resolve,reject)=>resolve(num+1));
-}
+asyncAdd(1,2).then((result)=>{
+    // return 3
+    return result+3;
+}).then(console.log)
 
-const test = new MyPromise(func);
-test.then(counter).then(counterWithPromise).then(console.log);
-
-const foo = new Promise(func);
+// const counter = (num)=>num+1;
+//
+// const counterWithPromise = (num)=>{
+//     return new MyPromise((resolve,reject)=>resolve(num+1));
+// }
+//
+// const counterNew = (num)=>{
+//     return new Promise((resolve,reject)=>resolve(num+1));
+// }
+//
+// const test = new MyPromise(func);
+// test.then(counter).then(counterWithPromise).then(console.log);
+//
+// const foo = new Promise(func);
 
 // foo.then(counterNew).then(counterNew).then(console.log);

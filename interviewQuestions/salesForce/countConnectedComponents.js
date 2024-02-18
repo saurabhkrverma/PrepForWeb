@@ -92,7 +92,7 @@ const dfs2 = (vertex, visited, graph) => {
 }
 const countComponents2 = (n, edges) => {
     let vertices = []
-    for(let i=0; i<n; i++) {
+    for(let i=1; i<=n; i++) {
         vertices[i] = i;
     }
     const graph = new Graph(vertices);
@@ -120,7 +120,7 @@ const countComponents2 = (n, edges) => {
 
 
 
-const totalNodes = 10;
-const edges = [[1,2], [1,3], [2, 4], [3, 5], [7,8]]
+const totalNodes = 6;
+const edges = [[1,3], [1,4], [2, 3], [2, 5], [4,6], [6,5]];
 
 console.log(countComponents2(totalNodes, edges));
