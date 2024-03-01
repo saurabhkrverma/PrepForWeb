@@ -39,7 +39,7 @@ const sequencePromise = (funcs) => {
                 return promise.then((result)=>{
                     return func(result);
                 })
-            },Promise.resolve(result))
+            },Promise.resolve(result));
             resolve(foo)
         })
     }

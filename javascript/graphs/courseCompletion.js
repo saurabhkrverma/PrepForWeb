@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/course-schedule/description/
+
 class Graph {
     constructor(vertices = []) {
         this.vertices = vertices;

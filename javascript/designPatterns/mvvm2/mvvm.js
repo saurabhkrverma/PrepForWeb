@@ -17,6 +17,7 @@ class ViewModel {
         this.nameInput = document.getElementById("nameInput");
         this.nameSubmit = document.getElementById("nameSubmit");
 
+
         //bindings
         this.nameInputValue = ""
 
